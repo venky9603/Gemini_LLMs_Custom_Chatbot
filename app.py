@@ -1,16 +1,17 @@
 import streamlit as st
 import os
-
 import pathlib
 import textwrap
+from PIL import Image
+import google.generativeai as genai
 
-from IPython.display import display
-from IPython.display import Markdown
+# from IPython.display import display
+# from IPython.display import Markdown
 #from altair.vegalite.v4.api import Chart
 
-def to_markdown(text):
-  text = text.replace('•', '  *')
-  return Markdown(textwrap.indent(text, '> ', predicate=lambda _: True))
+# def to_markdown(text):
+#   text = text.replace('•', '  *')
+#   return Markdown(textwrap.indent(text, '> ', predicate=lambda _: True))
 
 import os
 os.environ['GEMINI_API_KEY'] = "AIzaSyDMTX7EvqwlG5uWuQ2KqwXoZMYtarK8xvo"
