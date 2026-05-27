@@ -22,7 +22,7 @@ genai.configure(api_key=os.environ['GEMINI_API_KEY'])
 ## Function to load gemini model and get respones
 
 def get_gemini_response(question):
-    model = genai.GenerativeModel('models/gemini-3-flash-preview')
+    model = genai.GenerativeModel('gemini-2.5-flash-lite')
     #model = genai.GenerativeModel('gemini-2.5-flash-preview-04-17')
     response = model.generate_content(question)
     return response.text
