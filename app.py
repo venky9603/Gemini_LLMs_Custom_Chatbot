@@ -1,46 +1,33 @@
 import streamlit as st
-import os
-import pathlib
-import textwrap
-from PIL import Image
 import google.generativeai as genai
-
-# from IPython.display import display
-# from IPython.display import Markdown
-#from altair.vegalite.v4.api import Chart
-
-# def to_markdown(text):
-#   text = text.replace('•', '  *')
-#   return Markdown(textwrap.indent(text, '> ', predicate=lambda _: True))
-
 import os
-os.environ['GEMINI_API_KEY'] = "AIzaSyDMTX7EvqwlG5uWuQ2KqwXoZMYtarK8xvo"
 
-import google.generativeai as genai
-genai.configure(api_key=os.environ['GEMINI_API_KEY'])
+# Configure Gemini API
+genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
 
-## Function to load gemini model and get respones
-
+# Function to get Gemini response
 def get_gemini_response(question):
-    model = genai.GenerativeModel('gemini-2.5-flash-lite')
-    #model = genai.GenerativeModel('gemini-2.5-flash-preview-04-17')
+    model = genai.GenerativeModel("gemini-1.5-flash")
+
     response = model.generate_content(question)
+
     return response.text
 
-##initialize our streamlit app
-
-st.set_page_config(page_title="GEMINI LLM APP")
+# Streamlit App
+st.set_page_config(page_title="Gemini LLM APP")
 
 st.header("Gemini AI BOT Application")
 
-input=st.text_input("Input: ",key="input")
+user_input = st.text_input("Input:", key="input")
 
-submit=st.button("click me to generate response")
-
-## If ask button is clicked
+submit = st.button("Click Me To Generate Response")
 
 if submit:
-   
-    response=get_gemini_response(input)
-    st.subheader("The Response is")
-    st.write(response)
+    if user_input:
+        response = get_gemini_response(user_input)
+
+        st.subheader("The Response is")
+
+        st.write(response)
+    else:
+        st.warning("Please enter a prompt.")
